@@ -25,11 +25,20 @@ MonoBehaviour:
     m_Scopes: []
     m_IsDefault: 1
     m_Capabilities: 7
+<<<<<<< HEAD
+=======
+    m_ConfigSource: 0
+>>>>>>> c7b076483a8609affb6b61953f867ec5ef8d8b23
   m_UserSelectedRegistryName: 
   m_UserAddingNewScopedRegistry: 0
   m_RegistryInfoDraft:
     m_Modified: 0
     m_ErrorMessage: 
+<<<<<<< HEAD
     m_UserModificationsInstanceId: -830
     m_OriginalInstanceId: -832
+=======
+    m_UserModificationsInstanceId: -880
+    m_OriginalInstanceId: -882
+>>>>>>> c7b076483a8609affb6b61953f867ec5ef8d8b23
   m_LoadAssets: 0
