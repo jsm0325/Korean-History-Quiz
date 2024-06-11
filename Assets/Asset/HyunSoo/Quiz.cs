@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,7 @@ public class Quiz : MonoBehaviour
 
     public Transform[] quizPos;
 
+    public GameObject player;
 
     private int i = 0;
     private void OnTriggerEnter(Collider other)
@@ -41,17 +43,14 @@ public class Quiz : MonoBehaviour
             wrongC.text = wrongAnswerC[i];
             answer.text = answerText[i];
             shuffler.ShuffleButtons();
+            player.GetComponent<ThirdPersonController>().isPlayerRestricted = true;
+            UnityEngine.Cursor.visible = true;
+            UnityEngine.Cursor.lockState = CursorLockMode.None;
+            transform.position = quizPos[i].position;
+            transform.rotation = quizPos[i].rotation;
+            transform.localScale = quizPos[i].localScale;
             i++;
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            transform.position = quizPos[i].position;
-            transform.rotation = quizPos[i].rotation;
-            transform.localScale = quizPos[i].localScale;
-        }
-    }
 }
