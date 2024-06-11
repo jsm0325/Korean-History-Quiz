@@ -29,12 +29,12 @@ public class ScenarioEngine : MonoBehaviour
         dialog = canvas.transform.Find("Dialog").GetComponent<Canvas>();
         foreach (string name in objectsName) map.Add(name, GameObject.Find(name));
     }
-    public void StartScenario(string scriptName)
+    public void StartScenario(string scriptName, GameObject npc)
     {
         string script = Resources.Load<TextAsset>(scriptName).ToString();
-        StartCoroutine(PlayScript(script));
+        StartCoroutine(PlayScript(script, npc));
     }
-    public IEnumerator PlayScript(string script)
+    public IEnumerator PlayScript(string script, GameObject npc)
     {
         canvas.enabled = true;
         foreach (string token in script.Split('\n'))
@@ -121,8 +121,43 @@ public class ScenarioEngine : MonoBehaviour
                 Vector3 targetPosition = map[tokens[2]].transform.position;
                 StartCoroutine(RotateCameraTowards(cameras[cameraIndex], targetPosition));
             }
+            else if (fun == "animation")
+            {
+                if (map.TryGetValue(tokens[1], out GameObject obj))
+                {
+                    Animator animator = obj.GetComponent<Animator>();
+                    if (animator != null)
+                    {
+                        animator.ResetTrigger(tokens[2]); // 트리거 리셋
+                        animator.SetTrigger(tokens[2]); // 트리거 설정
+
+                        if (float.TryParse(tokens[3], out float duration))
+                        {
+                            yield return new WaitForSeconds(duration);
+                        }
+                        else
+                        {
+                            Debug.LogError($"Failed to parse duration: {tokens[3]}");
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError($"Animator not found on object {tokens[1]}.");
+                    }
+                }
+                else
+                {
+                    Debug.LogError($"Animation target {tokens[1]} not found.");
+                }
+            }
         }
         canvas.enabled = false;
+
+        // 시나리오가 끝난 후 오브젝트 비활성화
+        if (npc != null)
+        {
+            npc.SetActive(false);
+        }
     }
 
     IEnumerator RotateCameraTowards(GameObject camera, Vector3 targetPosition)

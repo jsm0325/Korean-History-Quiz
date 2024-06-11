@@ -39,7 +39,8 @@ public class NpcController : MonoBehaviour
             navMeshAgent.isStopped = true;
             transform.LookAt(player);
             // 시나리오 엔진으로 시나리오 스크립트 실행
-            scenarioEngine.StartScenario("story");
+            scenarioEngine.StartScenario("story", gameObject);
+
         }
     }
 }
