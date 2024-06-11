@@ -18,7 +18,7 @@ public class ScenarioEngine : MonoBehaviour
     private VideoPlayer player;
     private Dictionary<string, GameObject> map = new Dictionary<string, GameObject>();
 
-    private bool isPlayerRestricted = false;
+    public bool isPlayerRestricted = false;
 
     void Start()
     {
@@ -157,6 +157,7 @@ public class ScenarioEngine : MonoBehaviour
         if (npc != null)
         {
             npc.SetActive(false);
+            canvas.transform.gameObject.SetActive(false);
         }
     }
 

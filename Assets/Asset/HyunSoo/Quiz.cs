@@ -30,7 +30,7 @@ public class Quiz : MonoBehaviour
     public Transform[] quizPos;
 
     public GameObject player;
-
+    public ScenarioEngine sc;
     private int i = 0;
     private void OnTriggerEnter(Collider other)
     {
@@ -49,6 +49,7 @@ public class Quiz : MonoBehaviour
             transform.position = quizPos[i].position;
             transform.rotation = quizPos[i].rotation;
             transform.localScale = quizPos[i].localScale;
+            sc.isPlayerRestricted = true;
             i++;
         }
     }
