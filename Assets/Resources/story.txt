@@ -1,0 +1,22 @@
+restrictPlayer()
+camera(0)
+rotateCamera(0, Npc)
+
+dialog(Npc, "첫 번째 시련을 통과했군요.", 3)
+dialog(Npc, "나는 당신 같은 사람들을 안내하는 역할을 맡고 있습니다.", 3)
+
+dialog(Player, "여기가 어디죠?", 2)
+dialog(Npc, "여기가 어디냐고요?", 2)
+dialog(Npc, "여기는 과거를 잊은 사람들이 오는 곳입니다.", 3)
+
+dialog(Npc, "시련들을 통과하며 과거를 되찾고 나아가면, 이곳을 탈출할 수 있을 겁니다.", 4)
+moveTo(camera, Ship, 4)  # Ship 위치로 카메라 이동
+rotateCamera(0, ShipPosition)
+wait(4)
+
+dialog(Npc, "주위를 잘 살피면 탈출의 단서를 찾을 수 있을 겁니다. 주의 깊게 살피세요.", 4)
+dialog(Npc, "문 앞에 있는 손전등을 챙기고 행운을 빕니다.", 3)
+
+rotateCamera(0, Flashlight)
+
+releasePlayer()

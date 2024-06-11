@@ -86,6 +86,7 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
+        private bool isPlayerRestricted = false;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -155,7 +156,10 @@ namespace StarterAssets
         private void Update()
         {
             _hasAnimator = TryGetComponent(out _animator);
-
+            if (isPlayerRestricted)
+            {
+                return; // 플레이어 이동 제한
+            }
             JumpAndGravity();
             GroundedCheck();
             Move();
@@ -278,7 +282,10 @@ namespace StarterAssets
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
             }
         }
-
+        public void RestrictMovement(bool restrict)
+        {
+            isPlayerRestricted = restrict;
+        }
         private void JumpAndGravity()
         {
             if (Grounded)

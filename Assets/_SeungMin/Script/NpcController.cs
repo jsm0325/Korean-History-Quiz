@@ -11,12 +11,14 @@ public class NpcController : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     private bool playerDetected = false;
     private Animator animator;
+    private ScenarioEngine scenarioEngine;
 
     void Start()
     {  
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         navMeshAgent.stoppingDistance = stopDistance; // 멈추는 거리 설정
+        scenarioEngine = FindObjectOfType<ScenarioEngine>();
     }
     void Update()
     {
@@ -37,6 +39,7 @@ public class NpcController : MonoBehaviour
             navMeshAgent.isStopped = true;
             transform.LookAt(player);
             // 시나리오 엔진으로 시나리오 스크립트 실행
+            scenarioEngine.StartScenario("story");
         }
     }
 }
